@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Modern, responsive enterprise dashboard with centralized design tokens, accessible components, light/dark themes, and real-time infrastructure analytics.">
+  <title>NexusCloud | Enterprise Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Accessibility Skip Link -->
+  <a href="#mainContent" class="skip-link">Skip to main content</a>
+
+  <div class="app-container" id="appContainer">
+    <!-- ====================================================================
+         TOP HEADER / NAVBAR
+         ==================================================================== -->
+    <header class="app-header" role="banner">
+      <div class="header-left">
+        <!-- Mobile hamburger drawer toggle -->
+        <button type="button" class="menu-toggle-btn" id="menuToggleBtn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="sidebar">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+
+        <!-- Brand Identity -->
+        <a href="#" class="header-brand" aria-label="NexusCloud Enterprise Dashboard">
+          <div class="brand-icon-wrapper" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+          </div>
+          <span class="brand-text">NexusCloud</span>
+          <span class="brand-badge">Enterprise</span>
+        </a>
+      </div>
+
+      <!-- Header Search (Tablet/Desktop) -->
+      <div class="header-search" role="search">
+        <svg class="header-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="search" id="globalSearchInput" placeholder="Search clusters, users, metrics..." aria-label="Global search">
+        <span class="search-shortcut-hint" aria-hidden="true">⌘K</span>
+      </div>
+
+      <!-- Header Right Controls -->
+      <div class="header-right">
+        <!-- Theme Toggle Button -->
+        <button type="button" class="header-icon-btn" id="themeToggleBtn" aria-label="Switch between dark and light mode">
+          <!-- Sun Icon (visible in dark mode) -->
+          <svg class="theme-icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <!-- Moon Icon (visible in light mode) -->
+          <svg class="theme-icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display: none;">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <!-- Notifications Dropdown Trigger -->
+        <div style="position: relative;">
+          <button type="button" class="header-icon-btn" id="notificationsBtn" aria-label="Open notifications center (3 unread)" aria-expanded="false" aria-controls="notificationsDropdown">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+            <span class="notification-badge" aria-hidden="true"></span>
+          </button>
+
+          <!-- Notifications Dropdown Menu -->
+          <div class="dropdown-menu" id="notificationsDropdown" role="region" aria-label="Notifications Center">
+            <div class="dropdown-header">
+              <span class="dropdown-title">Notifications</span>
+              <span class="system-status-indicator" style="font-size: 10px;">3 New</span>
+            </div>
+            <div class="dropdown-body">
+              <a href="#" class="dropdown-item">
+                <div class="stat-card-icon icon-green" style="width: 28px; height: 28px;" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 2px;">
+                  <strong style="font-size: 12px;">Cluster US-East Scaled</strong>
+                  <span style="font-size: 11px; color: var(--color-text-secondary);">Autoscaling added 4 node instances.</span>
+                  <span style="font-size: 10px; color: var(--color-text-tertiary);">4m ago</span>
+                </div>
+              </a>
+              <a href="#" class="dropdown-item">
+                <div class="stat-card-icon icon-blue" style="width: 28px; height: 28px;" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 2px;">
+                  <strong style="font-size: 12px;">Scheduled Backup Done</strong>
+                  <span style="font-size: 11px; color: var(--color-text-secondary);">PostgreSQL primary node snapshotted.</span>
+                  <span style="font-size: 10px; color: var(--color-text-tertiary);">28m ago</span>
+                </div>
+              </a>
+              <a href="#" class="dropdown-item">
+                <div class="stat-card-icon icon-amber" style="width: 28px; height: 28px;" aria-hidden="true">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 2px;">
+                  <strong style="font-size: 12px;">SSL Certificate Notice</strong>
+                  <span style="font-size: 11px; color: var(--color-text-secondary);">Wildcard cert renewal queued for tomorrow.</span>
+                  <span style="font-size: 10px; color: var(--color-text-tertiary);">2h ago</span>
+                </div>
+              </a>
+            </div>
+            <div class="dropdown-footer">
+              <button type="button" class="btn" id="markAllReadBtn" style="font-size: 11px; width: 100%;">Mark all as read</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- User Profile Dropdown Trigger -->
+        <div style="position: relative;">
+          <button type="button" class="user-profile-btn" id="profileBtn" aria-label="User profile and account settings" aria-expanded="false" aria-controls="profileDropdown">
+            <div class="user-avatar-img" aria-hidden="true">AN</div>
+            <div class="user-info-text">
+              <div class="user-name">Alex Novak</div>
+              <div class="user-role">Cloud Architect</div>
+            </div>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+
+          <!-- Profile Dropdown Menu -->
+          <div class="dropdown-menu" id="profileDropdown" role="menu" aria-label="Account options">
+            <div class="dropdown-header" style="flex-direction: column; align-items: flex-start;">
+              <strong style="font-size: 13px;">Alex Novak</strong>
+              <span style="font-size: 11px; color: var(--color-text-tertiary);">alex.novak@nexuscloud.io</span>
+            </div>
+            <div class="dropdown-body">
+              <a href="#" class="dropdown-item" role="menuitem">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                <span>Profile & Identity</span>
+              </a>
+              <a href="#" class="dropdown-item" role="menuitem">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                <span>Account Settings</span>
+              </a>
+              <a href="#" class="dropdown-item" role="menuitem">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                <span>Billing & Licences</span>
+              </a>
+              <a href="#" class="dropdown-item" role="menuitem" style="color: var(--color-error);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                <span>Sign Out</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Drawer Backdrop -->
+    <div class="sidebar-backdrop" id="sidebarBackdrop" tabindex="-1" aria-hidden="true"></div>
+
+    <!-- ====================================================================
+         RESPONSIVE SIDEBAR NAVIGATION
+         ==================================================================== -->
+    <aside class="app-sidebar" id="sidebar" role="navigation" aria-label="Main Navigation">
+      <div class="sidebar-header">
+        <a href="#" class="header-brand" aria-label="NexusCloud Home">
+          <div class="brand-icon-wrapper" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+          </div>
+          <span class="brand-text">NexusCloud</span>
+          <span class="brand-badge">Enterprise</span>
+        </a>
+
+        <!-- Mobile Drawer Close Button -->
+        <button type="button" class="sidebar-close-btn" id="sidebarCloseBtn" aria-label="Close navigation sidebar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="sidebar-content">
+        <!-- Navigation Section: Core -->
+        <div class="nav-group">
+          <div class="nav-group-title">Platform</div>
+          <ul class="nav-list">
+            <li>
+              <a href="#" class="nav-item-link active" aria-current="page">
+                <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="3" y="3" width="7" height="7"></rect>
+                  <rect x="14" y="3" width="7" height="7"></rect>
+                  <rect x="14" y="14" width="7" height="7"></rect>
+                  <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                <span>Dashboard Overview</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-item-link">
+                <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="18" y1="20" x2="18" y2="10"></line>
+                  <line x1="12" y1="20" x2="12" y2="4"></line>
+                  <line x1="6" y1="20" x2="6" y2="14"></line>
+                </svg>
+                <span>Analytics & Insights</span>
+                <span class="nav-item-badge badge-accent">Live</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-item-link">
+                <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+                <span>Global Clusters</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-item-link">
+                <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                </svg>
+                <span>Real-Time Logs</span>
+                <span class="nav-item-badge">42k</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Navigation Section: Operations -->
+        <div class="nav-group">
+          <div class="nav-group-title">Operations</div>
+          <ul class="nav-list">
+            <li>
+              <a href="#" class="nav-item-link">
+                <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                </svg>
+                <span>Enterprise Records</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-item-link">
+                <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+                  <line x1="2" y1="10" x2="22" y2="10"></line>
+                </svg>
+                <span>Billing & Billing Tiers</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-item-link">
+                <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+                <span>Access Management</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Navigation Section: Governance -->
+        <div class="nav-group">
+          <div class="nav-group-title">Governance</div>
+          <ul class="nav-list">
+            <li>
+              <a href="#" class="nav-item-link">
+                <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <span>Security & Compliance</span>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-item-link">
+                <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="3"></circle>
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>
+                <span>Cluster Settings</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Sidebar Resource Meter Card -->
+        <div class="sidebar-promo-card">
+          <div class="promo-title">Storage Quota</div>
+          <div class="promo-desc">Multi-zone NVMe cache allocation.</div>
+          <div class="progress-track" role="progressbar" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100" aria-label="Storage quota usage">
+            <div class="progress-bar" style="width: 68%;"></div>
+          </div>
+          <div class="progress-label">
+            <span>68.4 GB Used</span>
+            <span>100 GB Max</span>
+          </div>
+          <button type="button" class="btn btn-secondary" id="upgradePlanBtn" style="width: 100%; font-size: 11px;">Expand Capacity</button>
+        </div>
+      </div>
+
+      <!-- Sidebar Desktop Collapse Rail Trigger -->
+      <div class="sidebar-footer">
+        <button type="button" class="btn" id="sidebarCollapseToggle" style="font-size: 11px; color: var(--color-text-tertiary);" aria-label="Collapse sidebar navigation">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+          <span>Collapse Menu</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- ====================================================================
+         MAIN DASHBOARD WORKSPACE
+         ==================================================================== -->
+    <main class="app-main" id="mainContent" role="main" tabindex="-1">
+      <!-- 1. Dashboard Overview Header -->
+      <section class="dashboard-overview" aria-labelledby="overviewHeading">
+        <div class="overview-title-group">
+          <h1 class="overview-title" id="overviewHeading">
+            Enterprise Overview
+            <span class="system-status-indicator">
+              <span class="status-dot-pulse" aria-hidden="true"></span>
+              All Systems Operational
+            </span>
+          </h1>
+          <p class="overview-subtitle">Real-time telemetry, transaction flows, and infrastructure health across global zones.</p>
+        </div>
+
+        <div class="overview-actions">
+          <!-- Timeframe selector filter pills -->
+          <div class="filter-pills-group" role="group" aria-label="Timeframe Selection">
+            <button type="button" class="filter-pill-btn" data-timeframe="24h">24h</button>
+            <button type="button" class="filter-pill-btn" data-timeframe="7d">7d</button>
+            <button type="button" class="filter-pill-btn active" data-timeframe="30d">30d</button>
+            <button type="button" class="filter-pill-btn" data-timeframe="90d">90d</button>
+            <button type="button" class="filter-pill-btn" data-timeframe="1y">1y</button>
+          </div>
+
+          <div class="overview-action-buttons">
+            <button type="button" class="btn btn-secondary" id="exportDataBtn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span>Export</span>
+            </button>
+
+            <button type="button" class="btn btn-primary" id="generateReportBtn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              <span>New Metric</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Statistics Cards Grid (1-col mobile -> 2-col tablet -> 4-col desktop) -->
+      <section class="stats-grid" aria-label="Key Performance Indicators">
+        <!-- Stat Card 1: Total Revenue -->
+        <article class="stat-card">
+          <div class="stat-card-header">
+            <span class="stat-card-title">Total Revenue</span>
+            <div class="stat-card-icon icon-blue" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="stat-card-body">
+            <span class="stat-value" id="kpiRevenue">$128,430.00</span>
+            <span class="trend-badge trend-up" aria-label="14.2% increase compared to previous period">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="18 15 12 9 6 15"></polyline>
+              </svg>
+              +14.2%
+            </span>
+          </div>
+          <div class="stat-card-footer">
+            <span>vs. $112,450 last month</span>
+            <!-- Sparkline SVG -->
+            <svg class="mini-sparkline" viewBox="0 0 72 24" fill="none" aria-hidden="true">
+              <path d="M0 18 Q 12 10, 24 16 T 48 8 T 72 4" stroke="var(--color-primary)" stroke-width="2" fill="none"></path>
+            </svg>
+          </div>
+        </article>
+
+        <!-- Stat Card 2: Active Subscriptions -->
+        <article class="stat-card">
+          <div class="stat-card-header">
+            <span class="stat-card-title">Active Subscriptions</span>
+            <div class="stat-card-icon icon-green" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <polyline points="16 11 18 13 22 9"></polyline>
+              </svg>
+            </div>
+          </div>
+          <div class="stat-card-body">
+            <span class="stat-value" id="kpiSubscribers">42,850</span>
+            <span class="trend-badge trend-up" aria-label="8.4% increase compared to previous period">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="18 15 12 9 6 15"></polyline>
+              </svg>
+              +8.4%
+            </span>
+          </div>
+          <div class="stat-card-footer">
+            <span>+1,240 new this week</span>
+            <svg class="mini-sparkline" viewBox="0 0 72 24" fill="none" aria-hidden="true">
+              <path d="M0 20 Q 18 18, 36 12 T 72 3" stroke="var(--color-success)" stroke-width="2" fill="none"></path>
+            </svg>
+          </div>
+        </article>
+
+        <!-- Stat Card 3: Avg Order Value -->
+        <article class="stat-card">
+          <div class="stat-card-header">
+            <span class="stat-card-title">Average Order Value</span>
+            <div class="stat-card-icon icon-purple" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="9" cy="21" r="1"></circle>
+                <circle cx="20" cy="21" r="1"></circle>
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="stat-card-body">
+            <span class="stat-value" id="kpiAov">$184.20</span>
+            <span class="trend-badge trend-down" aria-label="1.8% decrease compared to previous period">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+              -1.8%
+            </span>
+          </div>
+          <div class="stat-card-footer">
+            <span>Target: $180.00 base</span>
+            <svg class="mini-sparkline" viewBox="0 0 72 24" fill="none" aria-hidden="true">
+              <path d="M0 6 Q 24 14, 48 10 T 72 17" stroke="var(--color-purple)" stroke-width="2" fill="none"></path>
+            </svg>
+          </div>
+        </article>
+
+        <!-- Stat Card 4: SLA & Availability -->
+        <article class="stat-card">
+          <div class="stat-card-header">
+            <span class="stat-card-title">System Availability</span>
+            <div class="stat-card-icon icon-amber" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="stat-card-body">
+            <span class="stat-value" id="kpiUptime">99.98%</span>
+            <span class="trend-badge trend-up" aria-label="0.02% above SLA target">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="18 15 12 9 6 15"></polyline>
+              </svg>
+              +0.02%
+            </span>
+          </div>
+          <div class="stat-card-footer">
+            <span>Guaranteed SLA: 99.95%</span>
+            <svg class="mini-sparkline" viewBox="0 0 72 24" fill="none" aria-hidden="true">
+              <path d="M0 12 L 20 12 L 25 4 L 35 20 L 40 12 L 72 12" stroke="var(--color-warning)" stroke-width="2" fill="none"></path>
+            </svg>
+          </div>
+        </article>
+      </section>
+
+      <!-- 3. Analytics & Interactive Charts Section (CSS Grid) -->
+      <section class="analytics-grid" aria-label="Performance and Traffic Analytics">
+        <!-- Main Area/Line Performance Chart -->
+        <article class="dashboard-card">
+          <div class="card-header">
+            <div class="card-header-left">
+              <h2 class="card-title">Revenue & Infrastructure Growth</h2>
+              <span class="card-subtitle">Gross transaction volume compared to cloud compute costs.</span>
+            </div>
+            <div class="card-header-actions">
+              <span class="system-status-indicator" style="font-size: 11px;">Updated Just Now</span>
+            </div>
+          </div>
+
+          <!-- Responsive SVG Chart Engine -->
+          <div class="chart-container" id="revenueChartContainer">
+            <svg class="chart-svg" viewBox="0 0 600 240" preserveAspectRatio="none" role="img" aria-label="Area chart showing gross revenue scaling over monthly increments">
+              <defs>
+                <linearGradient id="revGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#2563eb" stop-opacity="0.32"></stop>
+                  <stop offset="100%" stop-color="#2563eb" stop-opacity="0.0"></stop>
+                </linearGradient>
+                <linearGradient id="costGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#0ea5e9" stop-opacity="0.22"></stop>
+                  <stop offset="100%" stop-color="#0ea5e9" stop-opacity="0.0"></stop>
+                </linearGradient>
+              </defs>
+
+              <!-- Grid Horizontal Guide Lines -->
+              <line x1="40" y1="30" x2="580" y2="30" class="chart-grid-line"></line>
+              <text x="32" y="34" text-anchor="end" class="chart-axis-label">$150k</text>
+
+              <line x1="40" y1="80" x2="580" y2="80" class="chart-grid-line"></line>
+              <text x="32" y="84" text-anchor="end" class="chart-axis-label">$100k</text>
+
+              <line x1="40" y1="130" x2="580" y2="130" class="chart-grid-line"></line>
+              <text x="32" y="134" text-anchor="end" class="chart-axis-label">$50k</text>
+
+              <line x1="40" y1="180" x2="580" y2="180" class="chart-grid-line"></line>
+              <text x="32" y="184" text-anchor="end" class="chart-axis-label">$0k</text>
+
+              <!-- Cost Area Fill and Line -->
+              <path id="costAreaPath" class="chart-area-fill" fill="url(#costGrad)" d="M 50 180 L 50 140 Q 135 150, 220 135 T 390 110 T 560 90 L 560 180 Z"></path>
+              <path id="costLinePath" class="chart-line-stroke" stroke="#0ea5e9" d="M 50 140 Q 135 150, 220 135 T 390 110 T 560 90"></path>
+
+              <!-- Revenue Area Fill and Line -->
+              <path id="revAreaPath" class="chart-area-fill" fill="url(#revGrad)" d="M 50 180 L 50 120 Q 135 105, 220 90 T 390 55 T 560 40 L 560 180 Z"></path>
+              <path id="revLinePath" class="chart-line-stroke" stroke="#2563eb" d="M 50 120 Q 135 105, 220 90 T 390 55 T 560 40"></path>
+
+              <!-- Interactive Points on Revenue Line -->
+              <circle class="chart-point" stroke="#2563eb" cx="50" cy="120" r="4.5" data-val="$64,200" data-label="Jan"></circle>
+              <circle class="chart-point" stroke="#2563eb" cx="135" cy="105" r="4.5" data-val="$78,500" data-label="Feb"></circle>
+              <circle class="chart-point" stroke="#2563eb" cx="220" cy="90" r="4.5" data-val="$92,300" data-label="Mar"></circle>
+              <circle class="chart-point" stroke="#2563eb" cx="305" cy="72" r="4.5" data-val="$108,100" data-label="Apr"></circle>
+              <circle class="chart-point" stroke="#2563eb" cx="390" cy="55" r="4.5" data-val="$119,400" data-label="May"></circle>
+              <circle class="chart-point" stroke="#2563eb" cx="475" cy="48" r="4.5" data-val="$124,800" data-label="Jun"></circle>
+              <circle class="chart-point" stroke="#2563eb" cx="560" cy="40" r="4.5" data-val="$128,430" data-label="Jul"></circle>
+
+              <!-- X-Axis Labels -->
+              <text x="50" y="206" text-anchor="middle" class="chart-axis-label">Jan</text>
+              <text x="135" y="206" text-anchor="middle" class="chart-axis-label">Feb</text>
+              <text x="220" y="206" text-anchor="middle" class="chart-axis-label">Mar</text>
+              <text x="305" y="206" text-anchor="middle" class="chart-axis-label">Apr</text>
+              <text x="390" y="206" text-anchor="middle" class="chart-axis-label">May</text>
+              <text x="475" y="206" text-anchor="middle" class="chart-axis-label">Jun</text>
+              <text x="560" y="206" text-anchor="middle" class="chart-axis-label">Jul</text>
+            </svg>
+
+            <!-- Dynamic Tooltip -->
+            <div class="chart-tooltip" id="chartTooltip" role="tooltip"></div>
+
+            <!-- Accessible Data Table Fallback for Screen Readers -->
+            <table class="sr-only">
+              <caption>Monthly Revenue and Compute Costs (January - July)</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Month</th>
+                  <th scope="col">Gross Revenue</th>
+                  <th scope="col">Compute Cost</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Jan</td><td>$64,200</td><td>$28,100</td></tr>
+                <tr><td>Feb</td><td>$78,500</td><td>$31,200</td></tr>
+                <tr><td>Mar</td><td>$92,300</td><td>$34,500</td></tr>
+                <tr><td>Apr</td><td>$108,100</td><td>$39,800</td></tr>
+                <tr><td>May</td><td>$119,400</td><td>$44,200</td></tr>
+                <tr><td>Jun</td><td>$124,800</td><td>$46,900</td></tr>
+                <tr><td>Jul</td><td>$128,430</td><td>$48,300</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Chart Legend -->
+          <div class="chart-legend">
+            <div class="legend-item">
+              <span class="legend-color-dot" style="background-color: #2563eb;"></span>
+              <span>Gross Revenue (SaaS)</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-color-dot" style="background-color: #0ea5e9;"></span>
+              <span>Cloud Infrastructure Cost</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Traffic & Channel Donut Distribution Chart -->
+        <article class="dashboard-card">
+          <div class="card-header">
+            <div class="card-header-left">
+              <h2 class="card-title">Traffic Distribution</h2>
+              <span class="card-subtitle">Global ingress sources by protocol.</span>
+            </div>
+          </div>
+
+          <div class="donut-chart-wrapper">
+            <!-- SVG Donut Chart -->
+            <div class="donut-svg-box">
+              <svg class="donut-svg" viewBox="0 0 160 160" role="img" aria-label="Donut chart showing traffic breakdown: 45% REST APIs, 30% gRPC, 15% WebSockets, 10% GraphQL">
+                <!-- Base Circle -->
+                <circle cx="80" cy="80" r="54" fill="none" stroke="var(--color-surface-hover)" stroke-width="22"></circle>
+                <!-- Slices calculated with circumference 2*pi*54 = ~339.29 -->
+                <!-- REST APIs 45%: ~152.68 -->
+                <circle class="donut-slice" stroke="#2563eb" cx="80" cy="80" r="54" stroke-dasharray="152.7 339.3" stroke-dashoffset="0" data-label="REST APIs" data-val="45%"></circle>
+                <!-- gRPC 30%: ~101.79 -->
+                <circle class="donut-slice" stroke="#0ea5e9" cx="80" cy="80" r="54" stroke-dasharray="101.8 339.3" stroke-dashoffset="-152.7" data-label="gRPC" data-val="30%"></circle>
+                <!-- WebSockets 15%: ~50.89 -->
+                <circle class="donut-slice" stroke="#10b981" cx="80" cy="80" r="54" stroke-dasharray="50.9 339.3" stroke-dashoffset="-254.5" data-label="WebSockets" data-val="15%"></circle>
+                <!-- GraphQL 10%: ~33.93 -->
+                <circle class="donut-slice" stroke="#f59e0b" cx="80" cy="80" r="54" stroke-dasharray="33.9 339.3" stroke-dashoffset="-305.4" data-label="GraphQL" data-val="10%"></circle>
+              </svg>
+
+              <div class="donut-center-label" aria-hidden="true">
+                <span class="donut-center-value" id="donutValueDisplay">1.42M</span>
+                <span class="donut-center-sub" id="donutLabelDisplay">Req / min</span>
+              </div>
+            </div>
+
+            <!-- Breakdown list -->
+            <div class="channel-breakdown-list">
+              <div class="channel-item">
+                <div class="channel-info">
+                  <span class="legend-color-dot" style="background-color: #2563eb;"></span>
+                  <span>REST API Gateways</span>
+                </div>
+                <span class="channel-metric">45% (639k)</span>
+              </div>
+              <div class="channel-item">
+                <div class="channel-info">
+                  <span class="legend-color-dot" style="background-color: #0ea5e9;"></span>
+                  <span>gRPC Microservices</span>
+                </div>
+                <span class="channel-metric">30% (426k)</span>
+              </div>
+              <div class="channel-item">
+                <div class="channel-info">
+                  <span class="legend-color-dot" style="background-color: #10b981;"></span>
+                  <span>WebSocket Streams</span>
+                </div>
+                <span class="channel-metric">15% (213k)</span>
+              </div>
+              <div class="channel-item">
+                <div class="channel-info">
+                  <span class="legend-color-dot" style="background-color: #f59e0b;"></span>
+                  <span>GraphQL Mesh</span>
+                </div>
+                <span class="channel-metric">10% (142k)</span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- 4. Secondary Section: Activity Feed & System Health (CSS Grid) -->
+      <section class="activity-health-grid" aria-label="System Activity and Cluster Health">
+        <!-- Recent Activity Feed -->
+        <article class="dashboard-card">
+          <div class="card-header">
+            <div class="card-header-left">
+              <h2 class="card-title">Recent Infrastructure Activity</h2>
+              <span class="card-subtitle">Real-time cluster events and system deployments.</span>
+            </div>
+            <button type="button" class="btn btn-secondary" style="font-size: 11px;">View All</button>
+          </div>
+
+          <div class="timeline-list">
+            <div class="timeline-item">
+              <span class="timeline-bullet bullet-green" aria-hidden="true"></span>
+              <div class="timeline-content">
+                <div class="timeline-header">
+                  <span class="timeline-title">SOC2 Type II Audit Completed</span>
+                  <time class="timeline-time" datetime="2026-09-19T14:32:00">8m ago</time>
+                </div>
+                <p class="timeline-desc">Automated vulnerability scan verified 100% compliance across all 18 production clusters.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <span class="timeline-bullet" aria-hidden="true"></span>
+              <div class="timeline-content">
+                <div class="timeline-header">
+                  <span class="timeline-title">Kubernetes Blue/Green Deploy</span>
+                  <time class="timeline-time" datetime="2026-09-19T14:15:00">25m ago</time>
+                </div>
+                <p class="timeline-desc">Service `auth-gateway-v3` deployed with 0ms downtime. Traffic shifted 100%.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <span class="timeline-bullet bullet-purple" aria-hidden="true"></span>
+              <div class="timeline-content">
+                <div class="timeline-header">
+                  <span class="timeline-title">Database Read-Replica Sync</span>
+                  <time class="timeline-time" datetime="2026-09-19T13:40:00">1h ago</time>
+                </div>
+                <p class="timeline-desc">Replication lag in `ap-southeast-1` recovered to &lt; 2ms latency threshold.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <span class="timeline-bullet bullet-amber" aria-hidden="true"></span>
+              <div class="timeline-content">
+                <div class="timeline-header">
+                  <span class="timeline-title">DDoS Scrubbing Center Mitigated Spike</span>
+                  <time class="timeline-time" datetime="2026-09-19T12:05:00">2h ago</time>
+                </div>
+                <p class="timeline-desc">SYN flood attempt against CDN edge filtered automatically without user impact.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- System Health & Resource Allocations -->
+        <article class="dashboard-card">
+          <div class="card-header">
+            <div class="card-header-left">
+              <h2 class="card-title">Cluster Load & Resources</h2>
+              <span class="card-subtitle">Aggregated cloud node capacity.</span>
+            </div>
+          </div>
+
+          <div class="health-metrics-container">
+            <!-- Metric 1: CPU -->
+            <div class="gauge-row">
+              <div class="gauge-header">
+                <span class="gauge-name">vCPU Utilization</span>
+                <span class="gauge-value">42.8% (128 Cores)</span>
+              </div>
+              <div class="gauge-bar-track" role="progressbar" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100" aria-label="vCPU load">
+                <div class="gauge-bar-fill fill-blue" style="width: 43%;"></div>
+              </div>
+            </div>
+
+            <!-- Metric 2: Memory -->
+            <div class="gauge-row">
+              <div class="gauge-header">
+                <span class="gauge-name">RAM Allocation</span>
+                <span class="gauge-value">68.2% (512 GB)</span>
+              </div>
+              <div class="gauge-bar-track" role="progressbar" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100" aria-label="RAM allocation">
+                <div class="gauge-bar-fill fill-emerald" style="width: 68%;"></div>
+              </div>
+            </div>
+
+            <!-- Metric 3: Disk I/O -->
+            <div class="gauge-row">
+              <div class="gauge-header">
+                <span class="gauge-name">Disk IOPS Bandwidth</span>
+                <span class="gauge-value">31.4% (80,000 IOPS)</span>
+              </div>
+              <div class="gauge-bar-track" role="progressbar" aria-valuenow="31" aria-valuemin="0" aria-valuemax="100" aria-label="Disk IOPS bandwidth">
+                <div class="gauge-bar-fill fill-amber" style="width: 31%;"></div>
+              </div>
+            </div>
+
+            <!-- Cluster Regions Health -->
+            <div class="server-cluster-grid">
+              <div class="server-node-card">
+                <div>
+                  <div class="node-info-name">us-east-1</div>
+                  <span style="font-size: 10px; color: var(--color-text-tertiary);">Virginia</span>
+                </div>
+                <span class="node-status-pill">
+                  <span class="status-dot-pulse" style="width: 5px; height: 5px;" aria-hidden="true"></span>
+                  99.99%
+                </span>
+              </div>
+
+              <div class="server-node-card">
+                <div>
+                  <div class="node-info-name">eu-west-1</div>
+                  <span style="font-size: 10px; color: var(--color-text-tertiary);">Ireland</span>
+                </div>
+                <span class="node-status-pill">
+                  <span class="status-dot-pulse" style="width: 5px; height: 5px;" aria-hidden="true"></span>
+                  99.98%
+                </span>
+              </div>
+
+              <div class="server-node-card">
+                <div>
+                  <div class="node-info-name">ap-south-1</div>
+                  <span style="font-size: 10px; color: var(--color-text-tertiary);">Mumbai</span>
+                </div>
+                <span class="node-status-pill">
+                  <span class="status-dot-pulse" style="width: 5px; height: 5px;" aria-hidden="true"></span>
+                  100%
+                </span>
+              </div>
+
+              <div class="server-node-card">
+                <div>
+                  <div class="node-info-name">sa-east-1</div>
+                  <span style="font-size: 10px; color: var(--color-text-tertiary);">São Paulo</span>
+                </div>
+                <span class="node-status-pill">
+                  <span class="status-dot-pulse" style="width: 5px; height: 5px;" aria-hidden="true"></span>
+                  99.97%
+                </span>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- 5. Responsive Enterprise Data Table Section -->
+      <section class="dashboard-card table-card" aria-labelledby="tableHeading">
+        <div class="card-header">
+          <div class="card-header-left">
+            <h2 class="card-title" id="tableHeading">Recent Enterprise Transactions</h2>
+            <span class="card-subtitle">Audited record of global tier payments, invoices, and service subscriptions.</span>
+          </div>
+          <div class="card-header-actions">
+            <button type="button" class="btn btn-secondary" id="downloadCsvBtn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span>Download CSV</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Table Toolbar: Search + Category Filter -->
+        <div class="table-toolbar">
+          <div class="table-search-input">
+            <svg class="table-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="search" id="tableSearchInput" placeholder="Filter by client, ID, or plan..." aria-label="Search transaction table">
+          </div>
+
+          <div class="table-filter-actions">
+            <select class="filter-select" id="statusFilterSelect" aria-label="Filter transactions by status">
+              <option value="all">All Statuses</option>
+              <option value="completed">Completed</option>
+              <option value="pending">Pending</option>
+              <option value="review">In Review</option>
+              <option value="failed">Failed</option>
+            </select>
+
+            <select class="filter-select" id="rowsPerPageSelect" aria-label="Select rows per page">
+              <option value="6">6 per page</option>
+              <option value="12">12 per page</option>
+              <option value="24">24 per page</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Responsive Table Container (Horizontal scroll on mobile with zero page blowout) -->
+        <div class="table-responsive-wrapper" tabindex="0" aria-label="Scrollable transaction table container">
+          <table class="data-table" id="transactionTable">
+            <thead>
+              <tr>
+                <th scope="col" style="width: 40px;">
+                  <input type="checkbox" class="custom-checkbox" id="selectAllCheckbox" aria-label="Select all transactions in table">
+                </th>
+                <th scope="col">Transaction ID</th>
+                <th scope="col">Client / Company</th>
+                <th scope="col">Service Tier</th>
+                <th scope="col">Timestamp</th>
+                <th scope="col">Amount</th>
+                <th scope="col">Status</th>
+                <th scope="col" style="text-align: right;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="tableBody">
+              <tr data-status="completed">
+                <td>
+                  <input type="checkbox" class="custom-checkbox row-checkbox" aria-label="Select transaction TX-9841">
+                </td>
+                <td><code style="font-family: var(--font-mono); font-weight: var(--font-weight-semibold); color: var(--color-primary);">#TX-9841</code></td>
+                <td>
+                  <div class="customer-cell">
+                    <div class="customer-avatar" aria-hidden="true">AC</div>
+                    <div class="customer-details">
+                      <span class="customer-name">Acme Global Corp</span>
+                      <span class="customer-email">finance@acmeglobal.com</span>
+                    </div>
+                  </div>
+                </td>
+                <td>Enterprise Dedicated</td>
+                <td><time datetime="2026-09-19T14:10">Sep 19, 14:10</time></td>
+                <td><strong>$12,400.00</strong></td>
+                <td><span class="status-badge badge-completed">Completed</span></td>
+                <td style="text-align: right;">
+                  <button type="button" class="table-action-btn" aria-label="View transaction TX-9841 details">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                  </button>
+                </td>
+              </tr>
+
+              <tr data-status="completed">
+                <td>
+                  <input type="checkbox" class="custom-checkbox row-checkbox" aria-label="Select transaction TX-9840">
+                </td>
+                <td><code style="font-family: var(--font-mono); font-weight: var(--font-weight-semibold); color: var(--color-primary);">#TX-9840</code></td>
+                <td>
+                  <div class="customer-cell">
+                    <div class="customer-avatar" style="background-color: var(--color-purple-subtle); color: var(--color-purple);" aria-hidden="true">SX</div>
+                    <div class="customer-details">
+                      <span class="customer-name">Starlight Cloud AI</span>
+                      <span class="customer-email">billing@starlight.ai</span>
+                    </div>
+                  </div>
+                </td>
+                <td>GPU Cluster 8xH100</td>
+                <td><time datetime="2026-09-19T13:45">Sep 19, 13:45</time></td>
+                <td><strong>$24,850.00</strong></td>
+                <td><span class="status-badge badge-completed">Completed</span></td>
+                <td style="text-align: right;">
+                  <button type="button" class="table-action-btn" aria-label="View transaction TX-9840 details">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                  </button>
+                </td>
+              </tr>
+
+              <tr data-status="pending">
+                <td>
+                  <input type="checkbox" class="custom-checkbox row-checkbox" aria-label="Select transaction TX-9839">
+                </td>
+                <td><code style="font-family: var(--font-mono); font-weight: var(--font-weight-semibold); color: var(--color-primary);">#TX-9839</code></td>
+                <td>
+                  <div class="customer-cell">
+                    <div class="customer-avatar" style="background-color: var(--color-warning-subtle); color: var(--color-warning);" aria-hidden="true">NL</div>
+                    <div class="customer-details">
+                      <span class="customer-name">Nova Logic Labs</span>
+                      <span class="customer-email">accounts@novalogic.io</span>
+                    </div>
+                  </div>
+                </td>
+                <td>Kubernetes Standard</td>
+                <td><time datetime="2026-09-19T13:20">Sep 19, 13:20</time></td>
+                <td><strong>$4,150.00</strong></td>
+                <td><span class="status-badge badge-pending">Pending</span></td>
+                <td style="text-align: right;">
+                  <button type="button" class="table-action-btn" aria-label="View transaction TX-9839 details">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                  </button>
+                </td>
+              </tr>
+
+              <tr data-status="review">
+                <td>
+                  <input type="checkbox" class="custom-checkbox row-checkbox" aria-label="Select transaction TX-9838">
+                </td>
+                <td><code style="font-family: var(--font-mono); font-weight: var(--font-weight-semibold); color: var(--color-primary);">#TX-9838</code></td>
+                <td>
+                  <div class="customer-cell">
+                    <div class="customer-avatar" style="background-color: var(--color-info-subtle); color: var(--color-info);" aria-hidden="true">VZ</div>
+                    <div class="customer-details">
+                      <span class="customer-name">Vanguard Zurich AG</span>
+                      <span class="customer-email">ops@vanguard-zurich.ch</span>
+                    </div>
+                  </div>
+                </td>
+                <td>Multi-Region High Availability</td>
+                <td><time datetime="2026-09-19T12:55">Sep 19, 12:55</time></td>
+                <td><strong>$18,900.00</strong></td>
+                <td><span class="status-badge badge-review">In Review</span></td>
+                <td style="text-align: right;">
+                  <button type="button" class="table-action-btn" aria-label="View transaction TX-9838 details">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                  </button>
+                </td>
+              </tr>
+
+              <tr data-status="completed">
+                <td>
+                  <input type="checkbox" class="custom-checkbox row-checkbox" aria-label="Select transaction TX-9837">
+                </td>
+                <td><code style="font-family: var(--font-mono); font-weight: var(--font-weight-semibold); color: var(--color-primary);">#TX-9837</code></td>
+                <td>
+                  <div class="customer-cell">
+                    <div class="customer-avatar" style="background-color: var(--color-success-subtle); color: var(--color-success);" aria-hidden="true">QT</div>
+                    <div class="customer-details">
+                      <span class="customer-name">Quantum Telecom</span>
+                      <span class="customer-email">netops@quantumtelecom.com</span>
+                    </div>
+                  </div>
+                </td>
+                <td>Edge CDN Acceleration</td>
+                <td><time datetime="2026-09-19T11:40">Sep 19, 11:40</time></td>
+                <td><strong>$8,750.00</strong></td>
+                <td><span class="status-badge badge-completed">Completed</span></td>
+                <td style="text-align: right;">
+                  <button type="button" class="table-action-btn" aria-label="View transaction TX-9837 details">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                  </button>
+                </td>
+              </tr>
+
+              <tr data-status="failed">
+                <td>
+                  <input type="checkbox" class="custom-checkbox row-checkbox" aria-label="Select transaction TX-9836">
+                </td>
+                <td><code style="font-family: var(--font-mono); font-weight: var(--font-weight-semibold); color: var(--color-primary);">#TX-9836</code></td>
+                <td>
+                  <div class="customer-cell">
+                    <div class="customer-avatar" style="background-color: var(--color-error-subtle); color: var(--color-error);" aria-hidden="true">PS</div>
+                    <div class="customer-details">
+                      <span class="customer-name">Peak Scale Robotics</span>
+                      <span class="customer-email">payments@peakscale.de</span>
+                    </div>
+                  </div>
+                </td>
+                <td>Dedicated Bare Metal</td>
+                <td><time datetime="2026-09-19T10:15">Sep 19, 10:15</time></td>
+                <td><strong>$6,200.00</strong></td>
+                <td><span class="status-badge badge-failed">Failed</span></td>
+                <td style="text-align: right;">
+                  <button type="button" class="table-action-btn" aria-label="View transaction TX-9836 details">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Table Pagination Controls -->
+        <div class="table-pagination">
+          <div class="pagination-info" id="paginationInfo">
+            Showing <strong>1</strong> to <strong>6</strong> of <strong>24</strong> entries
+          </div>
+
+          <div class="pagination-controls" role="navigation" aria-label="Table pagination navigation">
+            <button type="button" class="page-btn" id="prevPageBtn" disabled aria-label="Go to previous page">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button type="button" class="page-btn active" aria-current="page">1</button>
+            <button type="button" class="page-btn">2</button>
+            <button type="button" class="page-btn">3</button>
+            <button type="button" class="page-btn">4</button>
+            <button type="button" class="page-btn" id="nextPageBtn" aria-label="Go to next page">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ====================================================================
+         FOOTER
+         ==================================================================== -->
+    <footer class="app-footer" role="contentinfo">
+      <div class="app-footer-inner" style="width: 100%;">
+        <div class="footer-meta">
+          <span class="system-status-indicator">
+            <span class="status-dot-pulse" style="width: 6px; height: 6px;" aria-hidden="true"></span>
+            All clusters 100% operational
+          </span>
+          <span class="footer-version">v2.14.0-prod</span>
+        </div>
+
+        <div class="footer-links">
+          <a href="#" class="footer-link">Documentation</a>
+          <a href="#" class="footer-link">API Reference</a>
+          <a href="#" class="footer-link">Security Whitepaper</a>
+          <a href="#" class="footer-link">Compliance (ISO 27001)</a>
+          <a href="#" class="footer-link">Privacy Policy</a>
+        </div>
+
+        <div>
+          &copy; 2026 NexusCloud Technologies Inc. All rights reserved.
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Application Logic -->
+  <script src="script.js"></script>
+</body>
+</html>
